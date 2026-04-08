@@ -23,17 +23,17 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycby2niOXiTFY5CngMJ2QD8K0
 
 /* ── 2. 活動資訊（顯示在 Banner 與資訊欄）───────────────────── */
 const CONFIG = {
-  活動主標題:   '畢業前，想對摩斯說的話',
+  活動主標題:   '畢業前，想對摩斯說的話~',
   活動副標題:   '每一個與摩斯共度的時光，都是青春最美的滋味\n填寫問卷，就有機會抽中 Nintendo Switch 2！',
-  活動開始日期: '2026 / 05 / 20',
-  活動結束日期: '2026 / 06 / 15',
-  首獎名稱:     'Nintendo Switch 2',
-  中獎公告日期: '2026 / 06 / 30',
+  活動開始日期: '2026/05/20',
+  活動結束日期: '2026/06/15',
+  首獎名稱:'頭獎｜Nintendo Switch 2 乙台（共 1 名）\n貳獎｜35週年發光摩斯卡（儲值金 $1,000）乙張（共 2 名）\n參獎｜摩斯卡（儲值金 $500）乙張（共 5 名）',
+  中獎公告日期: '2026/06/30',
   送出按鈕文字: '🎓 送出問卷，參加抽獎！',
 
   /* ── 3. 感謝彈窗文字（填完問卷後跳出）────────────────────── */
   感謝標題: '感謝填寫！',
-  感謝內文: '你的回覆已成功送出 🍔\n中獎名單將於 2026 年 6 月 30 日\n公告於摩斯漢堡官方網站，\n並透過會員訊息匣及 Email 聯繫中獎人。\n\n祝你畢業快樂，前途似錦！✨',
+  感謝內文: '你的回覆已成功送出 🍔\n中獎名單將於 2026 年 6 月 30 日\n公告於摩斯漢堡官方網站，\n並透過會員訊息匣及 Email 聯繫中獎人。\n\n祝您畢業快樂，前途似錦！✨',
   關閉按鈕: '好的，期待中獎通知！',
 
   /* ── 4. 題目一：漢堡選項（最多選 3 樣）───────────────────────
@@ -358,7 +358,7 @@ const CONFIG = {
     </div>
     <div class="info-item">
       <div class="info-icon">🏆</div>
-      <div><div class="info-label">首獎</div><div class="info-value" id="infoPrize"></div></div>
+      <div><div class="info-label">抽獎獎項</div><div class="info-value" id="infoPrize"></div></div>
     </div>
     <div class="info-item">
       <div class="info-icon">📣</div>
@@ -374,7 +374,7 @@ const CONFIG = {
   <!-- ① 手機號碼 -->
   <div class="card">
     <div class="q-title"><span class="q-num">①</span>手機號碼<span class="tag tag-req">必填</span></div>
-    <p class="q-sub">請輸入 10 位數字手機號碼，用於中獎通知及抽獎資格確認</p>
+    <p class="q-sub">請輸入 10 位數字手機號碼，用於抽獎資格確認</p>
     <div class="phone-wrap">
       <span class="phone-icon">📱</span>
       <input type="tel" id="phone" placeholder="0912 345 678" maxlength="10" inputmode="numeric">
@@ -385,7 +385,7 @@ const CONFIG = {
   <!-- ② 我的校園味道 -->
   <div class="card">
     <div class="q-title"><span class="q-num">②</span>我的校園味道<span class="tag tag-req">必填</span></div>
-    <p class="q-sub">在這段青春歲月裡，哪三款摩斯漢堡陪伴了你最多？（限選 3 樣）</p>
+    <p class="q-sub">在這段青春歲月裡，摩斯漢堡哪款餐點陪伴了您最多？（最多選 3 樣）</p>
     <div class="counter">已選 <b id="q1Count">0</b> / 3 樣</div>
     <div class="burger-grid" id="burgerGrid"></div>
     <div class="err-msg" id="q1Err">⚠ 請至少選擇 1 樣</div>
@@ -394,7 +394,7 @@ const CONFIG = {
   <!-- ③ 最有感的摩斯活動 -->
   <div class="card">
     <div class="q-title"><span class="q-num">③</span>最有感的摩斯活動<span class="tag tag-req">必填</span></div>
-    <p class="q-sub">哪幾個活動讓你印象最深刻？（限選 3 樣）</p>
+    <p class="q-sub">摩斯漢堡哪幾個活動讓你印象最深刻？（最多選 3 樣）</p>
     <div class="counter">已選 <b id="q2Count">0</b> / 3 樣</div>
     <div class="chip-grid" id="chipGrid"></div>
     <div class="err-msg" id="q2Err">⚠ 請至少選擇 1 樣</div>
@@ -403,7 +403,7 @@ const CONFIG = {
   <!-- ④ 希望這間店能變得更好 -->
   <div class="card">
     <div class="q-title"><span class="q-num">④</span>希望這間店能變得更好<span class="tag tag-req">必填</span></div>
-    <p class="q-sub">你最希望改善哪個地方？（單選）</p>
+    <p class="q-sub">您最希望這間店改善哪個地方讓它可以更美好？（單選）</p>
     <div class="radio-list" id="radioList"></div>
     <div class="other-wrap" id="otherWrap">
       <input type="text" id="otherText" placeholder="請輸入您的建議…" maxlength="200">
@@ -413,9 +413,9 @@ const CONFIG = {
 
   <!-- ⑤ 那一味，是我懷念的好滋味 -->
   <div class="card">
-    <div class="q-title"><span class="q-num">⑤</span>那一味，是我懷念的好滋味<span class="tag tag-opt">選填</span></div>
-    <p class="q-sub">有什麼想對摩斯說的話，或最難忘的摩斯記憶？歡迎留下你的故事 ✍</p>
-    <textarea id="memory" placeholder="例如：大學四年每週二都會點一杯咖啡配作業…"></textarea>
+    <div class="q-title"><span class="q-num">⑤</span>那一味，是我懷念的好滋味~（非必填）<span class="tag tag-opt">選填</span></div>
+    <p class="q-sub">有沒有想對摩斯說的話，或是您最希望再次推出的經典美味？歡迎在這裡留下您的想法或建議 ✍</p>
+    <textarea id="memory" placeholder="例如：我最希望XXXX堡可以重新回歸上市。"></textarea>
   </div>
 
   <!-- 注意事項 -->
