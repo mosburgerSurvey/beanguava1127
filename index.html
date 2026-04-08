@@ -628,3 +628,19 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   document.getElementById('overlay').classList.add('show');
   btn.disabled    = false;
   btn.textContent = CONFIG.送出按鈕文字;
+});
+
+/* ── 關閉彈窗並重置表單 ──────────────────────────────────── */
+document.getElementById('modalBtn').addEventListener('click', function() {
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('form').reset();
+  document.querySelectorAll('.burger-card').forEach(function(c){ c.classList.remove('sel','locked'); });
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel','locked'); });
+  document.querySelectorAll('.radio-item').forEach(function(c){ c.classList.remove('sel'); });
+  document.getElementById('q1Count').textContent = '0';
+  document.getElementById('q2Count').textContent = '0';
+  document.getElementById('otherWrap').classList.remove('show');
+});
+</script>
+</body>
+</html>
