@@ -44,6 +44,11 @@ const CONFIG = {
   中獎公告日期: '2026/06/30',
   送出按鈕文字: '🎓 送出問卷，參加抽獎！',
 
+  /* ── 4-a. 必填未完成時的警告視窗訊息 ──────────────────────
+     修改方式：把引號內的文字換成你想顯示的提示訊息
+     此訊息會在按下送出但有必填欄位未填時以 Alert 跳出     */
+  未填警告文字: '您還有題目尚未填寫，請確認所有必填欄位後再送出。',
+
   /* ── 4. 感謝彈窗文字（填完問卷後跳出）────────────────────── */
   感謝標題: '感謝填寫！',
   感謝內文: '你的回覆已成功送出 🍔\n中獎名單將於 2026 年 6 月 30 日\n公告於摩斯漢堡官方網站，\n並透過會員訊息匣及 會員Email 聯繫中獎人。\n\n祝您畢業快樂，前途似錦！✨',
@@ -509,7 +514,7 @@ document.getElementById('logoImg').src = LOGO_SRC;
 /* ── 填入基本文字 ──────────────────────────────────────────── */
 document.getElementById('heroTitle').textContent    = CONFIG.活動主標題;
 document.getElementById('heroSub').textContent      = CONFIG.活動副標題;
-document.getElementById('infoDate').textContent     = CONFIG.活動開始日期 + ' – ' + CONFIG.活動結束日期;
+document.getElementById('infoDate').textContent     = CONFIG.活動開始日期 + '-' + CONFIG.活動結束日期.replace('2026/','');
 document.getElementById('infoAnnounce').textContent = CONFIG.中獎公告日期 + ' 官網公告';
 document.getElementById('submitBtn').textContent    = CONFIG.送出按鈕文字;
 document.getElementById('modalTitle').textContent   = CONFIG.感謝標題;
@@ -723,10 +728,22 @@ document.getElementById('phone').addEventListener('input', function() {
 document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  const valid = validatePhone() | validateQ1() | validateQ2() | validateQ3();
+  // 逐一驗證所有必填欄位（必須全部通過才算有效）
+  var phoneOk = validatePhone();
+  var q1Ok    = validateQ1();
+  var q2Ok    = validateQ2();
+  var q3Ok    = validateQ3();
+  var valid   = phoneOk && q1Ok && q2Ok && q3Ok;
+
   if (!valid) {
+    // 跳出警告視窗，提醒使用者還有題目未填
+    alert(CONFIG.未填警告文字);
+    // 捲動到第一個錯誤欄位，方便使用者找到
     var firstErr = document.querySelector('.err-msg.show');
     if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // 確保按鈕恢復可點擊
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = CONFIG.送出按鈕文字;
     return;
   }
 
