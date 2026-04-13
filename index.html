@@ -95,13 +95,6 @@ const CONFIG = {
      ⚠️ 「其他建議」這個選項是固定最後一項，不需在此設定        */
   改善選項: [
     '這間店鋪整體表現很棒，沒有需要改善的地方',
-    '店內座位不足、不舒適或空間規劃不佳（如桌椅不好坐、動線擁擠或取餐不方便）',
-    '店內整體環境不夠整潔（廁所、垃圾桶或未即時整理）',
-    '店內設備老舊或空調不舒適（點餐機、空調太熱太冷或通風不良等）',
-    '店內有油煙味或異味過重',
-    '店內裝潢老舊，缺乏新穎感',
-    '店內音樂或燈光環境不佳（太吵 / 太暗 / 氛圍不佳）',
-    '服務人員應對或出餐效率需改善（等待時間長、服務品質不佳）',
   ],
 
   /* ── 8. 注意事項（顯示在送出按鈕上方）────────────────────────
@@ -665,7 +658,7 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
   });
 
   // 固定最後：其他建議
-  appendRadio('其他建議');
+  appendRadio('提供這間店改善建議');
 
   function appendRadio(opt) {
     const label = document.createElement('label');
@@ -678,8 +671,8 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
       document.querySelectorAll('.radio-item').forEach(function(el){ el.classList.remove('sel'); });
       label.classList.add('sel');
       const val = document.querySelector('input[name=improvement]:checked').value;
-      document.getElementById('otherWrap').classList.toggle('show', val === '其他建議');
-      if (val === '其他建議') document.getElementById('otherText').focus();
+      document.getElementById('otherWrap').classList.toggle('show', val === '提供這間店改善建議');
+      if (val === '提供這間店改善建議') document.getElementById('otherText').focus();
     });
     list.appendChild(label);
   }
