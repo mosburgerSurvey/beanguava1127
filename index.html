@@ -671,8 +671,8 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
       document.querySelectorAll('.radio-item').forEach(function(el){ el.classList.remove('sel'); });
       label.classList.add('sel');
       const val = document.querySelector('input[name=improvement]:checked').value;
-      document.getElementById('otherWrap').classList.toggle('show', val === '提供這間店改善建議');
-      if (val === '提供這間店改善建議') document.getElementById('otherText').focus();
+      document.getElementById('otherWrap').classList.toggle('show', val === '其他建議');
+      if (val === '其他建議') document.getElementById('otherText').focus();
     });
     list.appendChild(label);
   }
