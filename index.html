@@ -620,7 +620,7 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
   otherLabel.innerHTML =
     '<input type="checkbox" name="activity" value="__other__">' +
     '<div class="chip-box"></div>' +
-    '<span class="chip-label">✏️ 提供這間店改善建議</span>';
+    '<span class="chip-label">✏️ 其他（自行填寫）</span>';
   otherLabel.addEventListener('click', function(e) {
     const cb = otherLabel.querySelector('input');
     if (!cb.checked && document.querySelectorAll('#chipGrid input:checked').length >= 3) {
@@ -657,8 +657,8 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
     appendRadio(opt);
   });
 
-  // 固定最後：其他建議
-  appendRadio('其他建議');
+  // 固定最後：提供這間店改善建議
+  appendRadio('提供這間店改善建議');
 
   function appendRadio(opt) {
     const label = document.createElement('label');
@@ -671,8 +671,8 @@ document.getElementById('modalBtn').textContent     = CONFIG.關閉按鈕;
       document.querySelectorAll('.radio-item').forEach(function(el){ el.classList.remove('sel'); });
       label.classList.add('sel');
       const val = document.querySelector('input[name=improvement]:checked').value;
-      document.getElementById('otherWrap').classList.toggle('show', val === '其他建議');
-      if (val === '其他建議') document.getElementById('otherText').focus();
+      document.getElementById('otherWrap').classList.toggle('show', val === '提供這間店改善建議');
+      if (val === '提供這間店改善建議') document.getElementById('otherText').focus();
     });
     list.appendChild(label);
   }
@@ -763,8 +763,8 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     phone:       document.getElementById('phone').value.trim(),
     burgers:     burgerArr.join('、'),
     activities:  activityArr.join('、'),
-    improvement: improvement === '其他建議'
-                   ? '其他：' + document.getElementById('otherText').value.trim()
+    improvement: improvement === '提供這間店改善建議'
+                   ? '提供這間店改善建議：' + document.getElementById('otherText').value.trim()
                    : improvement,
     memory:      document.getElementById('memory').value.trim(),
     timestamp:   new Date().toLocaleString('zh-TW'),
